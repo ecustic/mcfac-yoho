@@ -10,15 +10,20 @@ class_name Axe
 @onready var axe_sprite: Sprite2D = $AxeSprite
 @onready var axe_stuck_sprite: Sprite2D = $AxeStuckSprite
 
+var colliding_with_viking: Viking = null
+
 func _on_body_entered(body:Node) -> void:
 	print("Axe collided with: ", body.name)
-	if body is Viking and not flying:
-		var viking: Viking = body
-		viking.pick_up_axe()
-		queue_free()
-	if body is Enemy and flying:
+	if body is Viking:
+		colliding_with_viking = body as Viking
+	elif body is Enemy and flying:
 		var enemy: Enemy = body
 		enemy.take_damage(damage)
+		linear_velocity = -linear_velocity
+		direction = -direction
+	elif body is StaticBody2D and flying:
+		linear_velocity = -linear_velocity
+		direction = -direction
 
 func _physics_process(_delta: float) -> void:
 	position += linear_velocity * _delta
@@ -35,5 +40,14 @@ func _physics_process(_delta: float) -> void:
 		axe_stuck_sprite.visible = false
 	else:
 		axe_sprite.visible = false
-		axe_stuck_sprite.flip_h = direction > 0
 		axe_stuck_sprite.visible = true
+		axe_stuck_sprite.flip_h = direction > 0
+
+	if colliding_with_viking != null and !flying:
+		colliding_with_viking.pick_up_axe()
+		queue_free()
+
+func _on_body_exited(body:Node2D) -> void:
+	print("Axe exited collision with: ", body.name)
+	if body is Viking:
+		colliding_with_viking = null

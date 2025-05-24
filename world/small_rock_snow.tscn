@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca6xxh2i58t5u"]
+
+[ext_resource type="Texture2D" uid="uid://cbnu3gbbvw66q" path="res://assets/world/tileset.png" id="1_4bm7v"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_pw48e"]
+points = PackedVector2Array(-3.99999, 3.00001, -4.00001, -1.99999, -1.00002, -6, 1.99998, -6.00001, 3.99999, -3.00001, 4.00001, 3.99999, 2.00003, 6.99999, 2.53399e-05, 7)
+
+[node name="SmallRockSnow" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_4bm7v")
+region_enabled = true
+region_rect = Rect2(48, 112, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("ConvexPolygonShape2D_pw48e")

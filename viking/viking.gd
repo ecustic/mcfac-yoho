@@ -27,8 +27,15 @@ func _process(delta: float) -> void:
 		invincibility_time = 0
 
 func _physics_process(_delta: float):
+	var mouse_axis = (get_global_mouse_position() - global_position)
+
+	if animation_state_machine.get_current_node() != "Attack":
+		look_direction = mouse_axis.normalized()
+
 	var flip = look_direction.x < 0
 	var current_move_speed = base_move_speed
+
+	move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 
 	if animation_state_machine.get_current_node() == "Attack":
 		current_move_speed = 0
@@ -42,6 +49,10 @@ func _physics_process(_delta: float):
 
 	move_and_slide()
 	update_animation_state()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("attack") and has_axe and animation_state_machine.get_current_node() != "Attack": 
+		animation_state_machine.start("Attack", true)
 
 func update_animation_state():
 	if (velocity.length() > 0):
