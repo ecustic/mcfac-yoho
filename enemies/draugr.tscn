@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqtcr0ne3ysct"]
+
+[ext_resource type="PackedScene" uid="uid://breny0wtnh0om" path="res://enemies/enemy.tscn" id="1_045se"]
+
+[node name="Draugr" instance=ExtResource("1_045se")]

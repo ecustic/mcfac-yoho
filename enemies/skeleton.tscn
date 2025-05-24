@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bexp8r2jps0wd"]
+
+[ext_resource type="PackedScene" uid="uid://breny0wtnh0om" path="res://enemies/enemy.tscn" id="1_eq7ty"]
+[ext_resource type="Texture2D" uid="uid://ce6at0xxpncow" path="res://assets/enemies/skeleton.png" id="2_odbwd"]
+
+[node name="Skeleton" instance=ExtResource("1_eq7ty")]
+health = 2
+damage = 2
+speed = 15
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_odbwd")

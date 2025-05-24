@@ -5,6 +5,8 @@ class_name Axe
 @export var linear_velocity: Vector2 = Vector2.ZERO
 @export var flying: bool = true
 
+@export var damage: int = 1
+
 @onready var axe_sprite: Sprite2D = $AxeSprite
 @onready var axe_stuck_sprite: Sprite2D = $AxeStuckSprite
 
@@ -14,6 +16,9 @@ func _on_body_entered(body:Node) -> void:
 		var viking: Viking = body
 		viking.pick_up_axe()
 		queue_free()
+	if body is Enemy and flying:
+		var enemy: Enemy = body
+		enemy.take_damage(damage)
 
 func _physics_process(_delta: float) -> void:
 	position += linear_velocity * _delta

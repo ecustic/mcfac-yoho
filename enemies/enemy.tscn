@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=3 uid="uid://breny0wtnh0om"]
+
+[ext_resource type="Script" uid="uid://cxdslwkumwroc" path="res://enemies/enemy.gd" id="1_7frlh"]
+[ext_resource type="Texture2D" uid="uid://dro2stjt7tmq5" path="res://assets/enemies/draugr.png" id="1_fw1ev"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7frlh"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_orwns"]
+resource_name = "Idle"
+length = 0.125
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a6vjd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_07tka"]
+resource_name = "Walk"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3t1x0"]
+_data = {
+&"Idle": SubResource("Animation_orwns"),
+&"RESET": SubResource("Animation_a6vjd"),
+&"Walk": SubResource("Animation_07tka")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_orwns"]
+radius = 7.0
+height = 22.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7frlh"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_orwns"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a6vjd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_07tka"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3t1x0"]
+states/Idle/node = SubResource("AnimationNodeAnimation_7frlh")
+states/Idle/position = Vector2(437, 120.938)
+states/Walk/node = SubResource("AnimationNodeAnimation_orwns")
+states/Walk/position = Vector2(630.5, 120.625)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_a6vjd"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_07tka")]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_7frlh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fw1ev")
+hframes = 8
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7frlh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3t1x0")
+}
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_orwns")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_3t1x0")
+anim_player = NodePath("../AnimationPlayer")
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="." method="_on_hurt_box_body_exited"]

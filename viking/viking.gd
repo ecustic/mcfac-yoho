@@ -2,6 +2,9 @@ extends CharacterBody2D
 class_name Viking
 
 @export var base_move_speed = 48
+@export var health: int = 10
+
+@export var invincibility_time: float = 0
 
 @export var move_direction: Vector2 = Vector2.ZERO
 @export var look_direction: Vector2 = Vector2.ZERO
@@ -17,6 +20,11 @@ class_name Viking
 @onready var main_arm: Node2D = %MainArm
 
 @onready var axe_sprite: Sprite2D = %MainHand/AxeSprite
+
+func _process(delta: float) -> void:
+	invincibility_time -= delta
+	if invincibility_time < 0:
+		invincibility_time = 0
 
 func _physics_process(_delta: float):
 	var flip = look_direction.x < 0
@@ -47,6 +55,7 @@ func update_animation_state():
 		axe_sprite.visible = false
 
 func throw_axe():
+	print("Throwing axe!")
 	if has_axe:
 		has_axe = false
 		axe_sprite.visible = false
@@ -67,3 +76,14 @@ func pick_up_axe():
 		axe_sprite.visible = true
 	else:
 		print("Already have an axe!")
+
+func take_damage(damage: int) -> void:
+	if invincibility_time > 0:
+		return
+	invincibility_time = 0.5
+	health -= damage
+	if health <= 0:
+		die()
+
+func die() -> void:
+	print("Viking has died!")
