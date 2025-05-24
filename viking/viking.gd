@@ -54,8 +54,9 @@ func throw_axe():
 		var thrown_axe: Axe = axe_scene.instantiate()
 		thrown_axe.global_position = main_hand.global_position
 		thrown_axe.linear_velocity = look_direction * 500
+		thrown_axe.direction = 1 if look_direction.x >= 0 else -1
 		thrown_axe.rotation = main_hand.global_rotation
-		thrown_axe.angular_velocity = 100
+		#thrown_axe.angular_velocity = 100
 		get_parent().add_child(thrown_axe)
 	else:
 		print("No axe to throw!")
