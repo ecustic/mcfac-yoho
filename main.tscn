@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyjm021cnfk5a"]
+[gd_scene load_steps=3 format=3 uid="uid://dlhx5qj5txanb"]
 
 [ext_resource type="Texture2D" uid="uid://bpnfnpsp6ku1h" path="res://icon.svg" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cnuwg718c7dhb" path="res://viking/viking.tscn" id="2_h2yge"]

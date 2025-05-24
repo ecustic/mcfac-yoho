@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Yoho"
-run/main_scene="uid://cyjm021cnfk5a"
+run/main_scene="uid://dlhx5qj5txanb"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
