@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyjm021cnfk5a"]
+
+[ext_resource type="Texture2D" uid="uid://bpnfnpsp6ku1h" path="res://icon.svg" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cnuwg718c7dhb" path="res://viking/viking.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("1_0xm2m")
+centered = false
+
+[node name="Viking" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(91, 47)
