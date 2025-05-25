@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgcnf3dlclig6"]
+[gd_scene load_steps=6 format=3 uid="uid://dgcnf3dlclig6"]
 
 [ext_resource type="Texture2D" uid="uid://bxnwpffcqnljx" path="res://assets/main_menu_bg.png" id="1_0dkrt"]
 [ext_resource type="Theme" uid="uid://bi3fc10geaq1s" path="res://ui/yoho_theme.tres" id="1_t7e0r"]
 [ext_resource type="Script" uid="uid://dar2k5qqq03bi" path="res://ui/main_menu.gd" id="1_wk0pr"]
+[ext_resource type="PackedScene" uid="uid://c7gsj0bf61dut" path="res://skill_tree/skill_button.tscn" id="4_rmr83"]
+[ext_resource type="Texture2D" uid="uid://bic003e82frmd" path="res://assets/ui/skills/axe_icon.png" id="5_8uxxo"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -23,51 +25,87 @@ grow_vertical = 2
 texture = ExtResource("1_0dkrt")
 stretch_mode = 6
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -79.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("1_t7e0r")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SkillButton" parent="VBoxContainer/PanelContainer2/Control" instance=ExtResource("4_rmr83")]
+layout_mode = 2
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 26.0
+offset_bottom = 26.0
+texture_normal = ExtResource("5_8uxxo")
+skill_name = "Return"
+skill_description = "Your axe returns to you after throwing it."
+skill_levels = 1
+skill_id = "return"
+
+[node name="SkillButton" parent="VBoxContainer/PanelContainer2/Control/SkillButton" instance=ExtResource("4_rmr83")]
+layout_mode = 0
+offset_left = 56.0
+offset_top = -88.0
+offset_right = 96.0
+offset_bottom = -48.0
+disabled = true
+skill_name = "Fiery Weapon"
+skill_description = "Your axe emits fire damage around it."
+skill_levels = 3
+skill_id = "fiery_weapon"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_t7e0r")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="PanelContainer/HBoxContainer3/HBoxContainer"]
+[node name="StartButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_t7e0r")
 text = "Start"
 
-[node name="SkillTreeButton" type="Button" parent="PanelContainer/HBoxContainer3/HBoxContainer"]
+[node name="SkillTreeButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_t7e0r")
 text = "Skills"
 
-[node name="ResetButton" type="Button" parent="PanelContainer/HBoxContainer3/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_t7e0r")
 text = "Reset"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/HBoxContainer3"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="QuitButton" type="Button" parent="PanelContainer/HBoxContainer3/HBoxContainer2"]
+[node name="QuitButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer2"]
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_t7e0r")
 text = "Quit"
 
-[connection signal="pressed" from="PanelContainer/HBoxContainer3/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer3/HBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer/SkillTreeButton" to="." method="_on_skill_tree_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]

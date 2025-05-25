@@ -19,10 +19,10 @@ grow_vertical = 2
 
 [node name="SkillButton" parent="." instance=ExtResource("1_8xmq4")]
 layout_mode = 0
-offset_left = 129.0
-offset_top = 104.0
-offset_right = 169.0
-offset_bottom = 144.0
+offset_left = 281.0
+offset_top = 264.0
+offset_right = 321.0
+offset_bottom = 304.0
 texture_normal = null
 skill_name = "Crystallize"
 skill_description = "Increases defense and health"
