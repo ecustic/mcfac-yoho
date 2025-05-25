@@ -3,6 +3,7 @@ class_name Viking
 
 @export var base_move_speed = 48
 @export var health: int = 10
+@export var axe_throw_speed: float = 500
 
 @export var invincibility_time: float = 0
 
@@ -73,7 +74,7 @@ func throw_axe():
 		var axe_scene = load("res://axe/axe.tscn") as PackedScene
 		var thrown_axe: Axe = axe_scene.instantiate()
 		thrown_axe.global_position = main_hand.global_position
-		thrown_axe.linear_velocity = look_direction * 500
+		thrown_axe.linear_velocity = look_direction * axe_throw_speed
 		thrown_axe.direction = 1 if look_direction.x >= 0 else -1
 		thrown_axe.rotation = main_hand.global_rotation
 		#thrown_axe.angular_velocity = 100

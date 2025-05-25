@@ -322,3 +322,9 @@ tree_root = SubResource("AnimationNodeStateMachine_r5bf2")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 8192
+limit_bottom = 8192
+limit_smoothed = true
+position_smoothing_enabled = true

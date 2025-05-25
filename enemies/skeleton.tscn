@@ -9,4 +9,5 @@ damage = 2
 speed = 15
 
 [node name="Sprite2D" parent="." index="1"]
+modulate = Color(0.843137, 0.843137, 0.713726, 1)
 texture = ExtResource("2_odbwd")
