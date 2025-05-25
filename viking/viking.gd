@@ -1,9 +1,7 @@
 extends CharacterBody2D
 class_name Viking
 
-@export var base_move_speed = 48
-@export var health: int = 10
-@export var axe_throw_speed: float = 500
+@export var state: VikingState
 
 @export var invincibility_time: float = 0
 
@@ -40,7 +38,7 @@ func _physics_process(_delta: float):
 		look_direction = mouse_axis.normalized()
 
 	var flip = look_direction.x < 0
-	var current_move_speed = base_move_speed
+	var current_move_speed = state.move_speed
 
 	move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 
@@ -79,7 +77,7 @@ func throw_axe():
 		var axe_scene = load("res://axe/axe.tscn") as PackedScene
 		var thrown_axe: Axe = axe_scene.instantiate()
 		thrown_axe.global_position = main_hand.global_position
-		thrown_axe.linear_velocity = look_direction * axe_throw_speed
+		thrown_axe.linear_velocity = look_direction * state.axe_throw_speed
 		thrown_axe.direction = 1 if look_direction.x >= 0 else -1
 		thrown_axe.rotation = main_hand.global_rotation
 		get_parent().add_child(thrown_axe)
@@ -98,13 +96,13 @@ func take_damage(damage: int) -> void:
 	if invincibility_time > 0:
 		return
 	invincibility_time = 0.5
-	health -= damage
+	state.health -= damage
 	on_hit_audio_player.play()
-	if health <= 0:
+	if state.health <= 0:
 		die()
 
 func die() -> void:
-	print("Viking has died!")
+	GameManager.show_main_menu()
 
 func _on_enemy_spawn_area_body_exited(exited_body:Node2D) -> void:
 	if exited_body is Enemy:
