@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://caouybht1etw"
+path="res://.godot/imported/viking impact.wav-8a06a3dba81b54b9b701878f2b08254a.sample"
+
+[deps]
+
+source_file="res://assets/enemies/viking impact.wav"
+dest_files=["res://.godot/imported/viking impact.wav-8a06a3dba81b54b9b701878f2b08254a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

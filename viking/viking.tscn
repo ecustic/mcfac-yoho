@@ -1,10 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://cnuwg718c7dhb"]
+[gd_scene load_steps=24 format=3 uid="uid://cnuwg718c7dhb"]
 
 [ext_resource type="Script" uid="uid://3cyb2ke74vkl" path="res://viking/viking.gd" id="1_fmhj4"]
 [ext_resource type="Texture2D" uid="uid://cilgk411f7hbg" path="res://assets/viking/viking_hand.png" id="1_m7qd5"]
+[ext_resource type="AudioStream" uid="uid://cu6h515e43e42" path="res://assets/axe/axe swing.wav" id="2_6gv48"]
 [ext_resource type="Texture2D" uid="uid://bc232ttjxdkqs" path="res://assets/viking/viking_body.png" id="2_fmhj4"]
 [ext_resource type="Texture2D" uid="uid://bmkck0bu7wkj4" path="res://assets/shadow.png" id="2_q32ix"]
 [ext_resource type="Texture2D" uid="uid://b6dvmy4erpm2s" path="res://assets/axe/axe.png" id="4_q32ix"]
+[ext_resource type="AudioStream" uid="uid://caouybht1etw" path="res://assets/enemies/viking impact.wav" id="7_cbdss"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 7.0
@@ -271,9 +273,16 @@ states/Walk/node = SubResource("AnimationNodeAnimation_6gv48")
 states/Walk/position = Vector2(600.5, 100.625)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_cbdss"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_5gq5p"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_am80c"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_nderd"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_ffl0f")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q32ix"]
+size = Vector2(1024, 1024)
+
 [node name="Viking" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_fmhj4")
+base_move_speed = 64
+
+[node name="AxeThrowAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6gv48")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.25098)
@@ -328,3 +337,15 @@ limit_right = 8192
 limit_bottom = 8192
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="EnemySpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_q32ix")
+
+[node name="OnHitAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_cbdss")
+pitch_scale = 0.75
+
+[connection signal="body_exited" from="EnemySpawnArea" to="." method="_on_enemy_spawn_area_body_exited"]

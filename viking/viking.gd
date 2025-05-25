@@ -22,6 +22,12 @@ class_name Viking
 
 @onready var axe_sprite: Sprite2D = %MainHand/AxeSprite
 
+@onready var axe_throw_audiostream_player: AudioStreamPlayer2D = $AxeThrowAudioStreamPlayer2D
+@onready var on_hit_audio_player: AudioStreamPlayer2D = $OnHitAudioStreamPlayer2D
+
+func _ready() -> void:
+	GameManager.viking = self
+
 func _process(delta: float) -> void:
 	invincibility_time -= delta
 	if invincibility_time < 0:
@@ -67,7 +73,6 @@ func update_animation_state():
 		axe_sprite.visible = false
 
 func throw_axe():
-	print("Throwing axe!")
 	if has_axe:
 		has_axe = false
 		axe_sprite.visible = false
@@ -77,8 +82,8 @@ func throw_axe():
 		thrown_axe.linear_velocity = look_direction * axe_throw_speed
 		thrown_axe.direction = 1 if look_direction.x >= 0 else -1
 		thrown_axe.rotation = main_hand.global_rotation
-		#thrown_axe.angular_velocity = 100
 		get_parent().add_child(thrown_axe)
+		axe_throw_audiostream_player.play()
 	else:
 		print("No axe to throw!")
 
@@ -94,8 +99,13 @@ func take_damage(damage: int) -> void:
 		return
 	invincibility_time = 0.5
 	health -= damage
+	on_hit_audio_player.play()
 	if health <= 0:
 		die()
 
 func die() -> void:
 	print("Viking has died!")
+
+func _on_enemy_spawn_area_body_exited(exited_body:Node2D) -> void:
+	if exited_body is Enemy:
+		GameManager.enemy_spawner.respawn_enemy(exited_body as Enemy)
