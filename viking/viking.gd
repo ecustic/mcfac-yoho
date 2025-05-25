@@ -3,6 +3,7 @@ class_name Viking
 
 @export var base_move_speed = 48
 @export var health: int = 10
+@export var axe_throw_speed: float = 500
 
 @export var invincibility_time: float = 0
 
@@ -27,8 +28,15 @@ func _process(delta: float) -> void:
 		invincibility_time = 0
 
 func _physics_process(_delta: float):
+	var mouse_axis = (get_global_mouse_position() - global_position)
+
+	if animation_state_machine.get_current_node() != "Attack":
+		look_direction = mouse_axis.normalized()
+
 	var flip = look_direction.x < 0
 	var current_move_speed = base_move_speed
+
+	move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 
 	if animation_state_machine.get_current_node() == "Attack":
 		current_move_speed = 0
@@ -42,6 +50,10 @@ func _physics_process(_delta: float):
 
 	move_and_slide()
 	update_animation_state()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("attack") and has_axe and animation_state_machine.get_current_node() != "Attack": 
+		animation_state_machine.start("Attack", true)
 
 func update_animation_state():
 	if (velocity.length() > 0):
@@ -62,7 +74,7 @@ func throw_axe():
 		var axe_scene = load("res://axe/axe.tscn") as PackedScene
 		var thrown_axe: Axe = axe_scene.instantiate()
 		thrown_axe.global_position = main_hand.global_position
-		thrown_axe.linear_velocity = look_direction * 500
+		thrown_axe.linear_velocity = look_direction * axe_throw_speed
 		thrown_axe.direction = 1 if look_direction.x >= 0 else -1
 		thrown_axe.rotation = main_hand.global_rotation
 		#thrown_axe.angular_velocity = 100

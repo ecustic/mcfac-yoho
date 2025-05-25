@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://breny0wtnh0om"]
+[gd_scene load_steps=15 format=3 uid="uid://breny0wtnh0om"]
 
 [ext_resource type="Script" uid="uid://cxdslwkumwroc" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://dro2stjt7tmq5" path="res://assets/enemies/draugr.png" id="1_fw1ev"]
+[ext_resource type="Texture2D" uid="uid://bmkck0bu7wkj4" path="res://assets/shadow.png" id="2_orwns"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7frlh"]
 radius = 6.0
@@ -86,6 +87,11 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_7frlh")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.25098)
+position = Vector2(2, 10)
+texture = ExtResource("2_orwns")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_fw1ev")

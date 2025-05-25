@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3cyb2ke74vkl" path="res://viking/viking.gd" id="1_fmhj4"]
 [ext_resource type="Texture2D" uid="uid://cilgk411f7hbg" path="res://assets/viking/viking_hand.png" id="1_m7qd5"]
 [ext_resource type="Texture2D" uid="uid://bc232ttjxdkqs" path="res://assets/viking/viking_body.png" id="2_fmhj4"]
-[ext_resource type="Script" uid="uid://bghuy38wfik4l" path="res://viking/player_controller.gd" id="4_d13po"]
+[ext_resource type="Texture2D" uid="uid://bmkck0bu7wkj4" path="res://assets/shadow.png" id="2_q32ix"]
 [ext_resource type="Texture2D" uid="uid://b6dvmy4erpm2s" path="res://assets/axe/axe.png" id="4_q32ix"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
@@ -275,6 +275,11 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 motion_mode = 1
 script = ExtResource("1_fmhj4")
 
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.25098)
+position = Vector2(2, 10)
+texture = ExtResource("2_q32ix")
+
 [node name="Body" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -316,5 +321,10 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_r5bf2")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="PlayerController" type="Node" parent="."]
-script = ExtResource("4_d13po")
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 8192
+limit_bottom = 8192
+limit_smoothed = true
+position_smoothing_enabled = true
