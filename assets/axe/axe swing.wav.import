@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cu6h515e43e42"
+path="res://.godot/imported/axe swing.wav-341df8776f08f9f8eec06483161d8924.sample"
+
+[deps]
+
+source_file="res://assets/axe/axe swing.wav"
+dest_files=["res://.godot/imported/axe swing.wav-341df8776f08f9f8eec06483161d8924.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
