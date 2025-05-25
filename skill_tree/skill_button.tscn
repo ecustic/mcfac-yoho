@@ -4,7 +4,7 @@
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f6dya"]
 
-[node name="SkillButton" type="TextureButton"]
+[node name="SkillButton" type="TextureButton" groups=["SkillTree"]]
 offset_right = 40.0
 offset_bottom = 40.0
 toggle_mode = true

@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvchdavme3nvr"]
+
+[ext_resource type="Script" uid="uid://ywrtrk5wgkn8" path="res://menu.gd" id="1_j0t7f"]
+[ext_resource type="Texture2D" uid="uid://byr6urvuvtk17" path="res://menu/Banner_Vertical.png" id="2_g18jx"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j0t7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -85.5
+offset_right = 43.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Play"
+
+[node name="Skills" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Skills"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Settings"
+
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Credits"
+
+[node name="Exit Game" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Exit Game"
+
+[node name="BannerVertical" type="Sprite2D" parent="MarginContainer"]
+show_behind_parent = true
+position = Vector2(43.5, 97.5)
+scale = Vector2(2, 2)
+texture = ExtResource("2_g18jx")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Skills" to="." method="_on_skills_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit Game" to="." method="_on_exit_game_pressed"]

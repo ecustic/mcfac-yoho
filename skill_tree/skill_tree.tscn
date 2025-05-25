@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://ee5awbo1jd6g"]
+[gd_scene load_steps=3 format=3 uid="uid://ee5awbo1jd6g"]
 
 [ext_resource type="PackedScene" uid="uid://c7gsj0bf61dut" path="res://skill_tree/skill_button.tscn" id="1_8xmq4"]
+[ext_resource type="Script" uid="uid://dbav3vwpmy1rx" path="res://skill_tree/skill_tree.gd" id="1_x57a4"]
 
-[node name="SkillTree" type="Control"]
+[node name="SkillTree" type="Control" groups=["SkillTree"]]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -1.0
 offset_right = 704.0
 offset_bottom = 384.0
+script = ExtResource("1_x57a4")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -19,13 +21,13 @@ grow_vertical = 2
 
 [node name="SkillButton" parent="." instance=ExtResource("1_8xmq4")]
 layout_mode = 0
-offset_left = 129.0
-offset_top = 104.0
-offset_right = 169.0
-offset_bottom = 144.0
+offset_left = 329.0
+offset_top = 272.0
+offset_right = 369.0
+offset_bottom = 312.0
 texture_normal = null
-skill_name = "Crystallize"
-skill_description = "Increases defense and health"
+skill_name = "Return"
+skill_description = "Your axe returns to you after reaching its max distance."
 skill_levels = 1
 
 [node name="SkillButton" parent="SkillButton" instance=ExtResource("1_8xmq4")]

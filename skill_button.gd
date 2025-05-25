@@ -1,6 +1,8 @@
 extends TextureButton
 class_name SkillNode
 
+signal skill_activated(skill_name: String)
+
 @export var skill_name: String = "Skill name:"
 @export var skill_description: String = "Skill description."
 @export var skill_levels: int
@@ -29,6 +31,12 @@ var level: int = 0:
 func _on_pressed() -> void:
 	level = min(level +1, skill_levels)
 	panel.show_behind_parent = true
+	
+	var skill_tree = get_tree().get_first_node_in_group("SkillTree")
+	skill_tree.setUnlock(skill_name, level)
+	self.self_modulate = Color(1, 1, 1)
+	
+	emit_signal("skill_activated", skill_name)
 	
 	line_2d.default_color = Color(0.242, 0.712, 0.0)
 	
