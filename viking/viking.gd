@@ -23,8 +23,18 @@ class_name Viking
 @onready var axe_throw_audiostream_player: AudioStreamPlayer2D = $AxeThrowAudioStreamPlayer2D
 @onready var on_hit_audio_player: AudioStreamPlayer2D = $OnHitAudioStreamPlayer2D
 
+@onready var xp_collect_area: Area2D = $XPCollectArea
+
 func _ready() -> void:
 	GameManager.viking = self
+	var xp_collision_shape = xp_collect_area.get_node("CollisionShape2D") as CollisionShape2D 
+	var xp_collision_circle_shape = xp_collision_shape.shape as CircleShape2D
+	xp_collision_circle_shape.radius = GameManager.viking_state.xp_radius
+
+	if GameManager.viking_state.skills.get("axe_fire", 0) > 0:
+		(axe_sprite.get_node("FireParticles2D") as CPUParticles2D).emitting = true
+	if GameManager.viking_state.skills.get("axe_frost", 0) > 0:
+		axe_sprite.self_modulate = Color(0.75, 0.75, 1.0)
 
 func _process(delta: float) -> void:
 	invincibility_time -= delta
@@ -53,11 +63,24 @@ func _physics_process(_delta: float):
 	body.scale.x = -1 if flip else 1    
 
 	move_and_slide()
+
+	if position.x < 8:
+		position.x = 8
+	elif position.x > 512 * 16 - 8:
+		position.x = 512 * 16 - 8
+	if position.y < 8:
+		position.y = 8
+	elif position.y > 512 * 16 - 8:
+		position.y = 512 * 16 - 8
+
 	update_animation_state()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("attack") and has_axe and animation_state_machine.get_current_node() != "Attack": 
 		animation_state_machine.start("Attack", true)
+	
+	if event.is_action_pressed("ui_cancel"):
+		GameManager.show_main_menu()
 
 func update_animation_state():
 	if (velocity.length() > 0):
@@ -92,11 +115,11 @@ func pick_up_axe():
 	else:
 		print("Already have an axe!")
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: float) -> void:
 	if invincibility_time > 0:
 		return
 	invincibility_time = 0.5
-	state.health -= damage
+	state.take_damage(damage)
 	on_hit_audio_player.play()
 	if state.health <= 0:
 		die()
@@ -107,3 +130,10 @@ func die() -> void:
 func _on_enemy_spawn_area_body_exited(exited_body:Node2D) -> void:
 	if exited_body is Enemy:
 		GameManager.enemy_spawner.respawn_enemy(exited_body as Enemy)
+
+
+func _on_xp_collect_area_area_entered(area: Area2D) -> void:
+	if area is Experience:
+		var experience: Experience = area as Experience
+		experience.follow_viking(self)
+		

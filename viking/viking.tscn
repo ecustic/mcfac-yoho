@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cnuwg718c7dhb"]
+[gd_scene load_steps=26 format=3 uid="uid://cnuwg718c7dhb"]
 
 [ext_resource type="Script" uid="uid://3cyb2ke74vkl" path="res://viking/viking.gd" id="1_fmhj4"]
 [ext_resource type="Texture2D" uid="uid://cilgk411f7hbg" path="res://assets/viking/viking_hand.png" id="1_m7qd5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bc232ttjxdkqs" path="res://assets/viking/viking_body.png" id="2_fmhj4"]
 [ext_resource type="Texture2D" uid="uid://bmkck0bu7wkj4" path="res://assets/shadow.png" id="2_q32ix"]
 [ext_resource type="Texture2D" uid="uid://b6dvmy4erpm2s" path="res://assets/axe/axe.png" id="4_q32ix"]
+[ext_resource type="Gradient" uid="uid://djsgom80k45yj" path="res://axe/fire_gradient.tres" id="7_5gq5p"]
 [ext_resource type="AudioStream" uid="uid://caouybht1etw" path="res://assets/enemies/viking impact.wav" id="7_cbdss"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
@@ -276,6 +277,9 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q32ix"]
 size = Vector2(1024, 1024)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cbdss"]
+radius = 64.0
+
 [node name="Viking" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_fmhj4")
@@ -314,6 +318,18 @@ rotation = -1.5708
 texture = ExtResource("4_q32ix")
 offset = Vector2(0, -4)
 
+[node name="FireParticles2D" type="CPUParticles2D" parent="Body/MainArm/MainHand/AxeSprite"]
+position = Vector2(2.52724e-05, -7)
+rotation = 1.5708
+emitting = false
+amount = 64
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, -100)
+color_ramp = ExtResource("7_5gq5p")
+
 [node name="MainHandSprite" type="Sprite2D" parent="Body/MainArm/MainHand"]
 texture = ExtResource("1_m7qd5")
 
@@ -347,4 +363,10 @@ shape = SubResource("RectangleShape2D_q32ix")
 stream = ExtResource("7_cbdss")
 pitch_scale = 0.75
 
+[node name="XPCollectArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XPCollectArea"]
+shape = SubResource("CircleShape2D_cbdss")
+
 [connection signal="body_exited" from="EnemySpawnArea" to="." method="_on_enemy_spawn_area_body_exited"]
+[connection signal="area_entered" from="XPCollectArea" to="." method="_on_xp_collect_area_area_entered"]

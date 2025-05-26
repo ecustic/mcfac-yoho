@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://breny0wtnh0om"]
+[gd_scene load_steps=16 format=3 uid="uid://breny0wtnh0om"]
 
 [ext_resource type="Script" uid="uid://cxdslwkumwroc" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://dro2stjt7tmq5" path="res://assets/enemies/draugr.png" id="1_fw1ev"]
 [ext_resource type="Texture2D" uid="uid://bmkck0bu7wkj4" path="res://assets/shadow.png" id="2_orwns"]
+[ext_resource type="Gradient" uid="uid://djsgom80k45yj" path="res://axe/fire_gradient.tres" id="4_a6vjd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7frlh"]
 radius = 6.0
@@ -120,6 +121,18 @@ anim_player = NodePath("../AnimationPlayer")
 volume_db = -20.0
 
 [node name="OnHitAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="FireParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.75
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, -100)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_max = 2.0
+color_ramp = ExtResource("4_a6vjd")
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="." method="_on_hurt_box_body_exited"]

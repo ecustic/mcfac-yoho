@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7gsj0bf61dut"]
 
-[ext_resource type="Script" uid="uid://d2gvue74cp75x" path="res://skill_button.gd" id="2_jctih"]
+[ext_resource type="Script" uid="uid://d2gvue74cp75x" path="res://skill_node.gd" id="2_jctih"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f6dya"]
 

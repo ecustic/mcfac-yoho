@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://dltx25pfiex3w"]
+
+[ext_resource type="Theme" uid="uid://bi3fc10geaq1s" path="res://ui/yoho_theme.tres" id="1_276te"]
+[ext_resource type="Script" uid="uid://c6uwudh8yp1yu" path="res://ui/hud.gd" id="1_546lt"]
+[ext_resource type="Texture2D" uid="uid://dwbxvbsah0of3" path="res://assets/ui.png" id="2_546lt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_276te"]
+atlas = ExtResource("2_546lt")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_en2x2"]
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.219608, 0.239216, 0.262745, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.176471, 0.192157, 0.207843, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1v5rv"]
+bg_color = Color(0.536592, 1.3236e-06, 2.88785e-07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.176471, 0.192157, 0.207843, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ihmi"]
+atlas = ExtResource("2_546lt")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SystemFont" id="SystemFont_276te"]
+font_names = PackedStringArray("Monospace")
+
+[sub_resource type="LabelSettings" id="LabelSettings_276te"]
+line_spacing = 0.0
+font = SubResource("SystemFont_276te")
+font_size = 12
+outline_size = 2
+outline_color = Color(0.176471, 0.192157, 0.207843, 1)
+shadow_size = 0
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_546lt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("1_276te")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_276te")
+stretch_mode = 5
+
+[node name="HealthProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_en2x2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1v5rv")
+value = 50.0
+show_percentage = false
+
+[node name="XPTextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7ihmi")
+stretch_mode = 5
+
+[node name="XPLabel" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "965"
+label_settings = SubResource("LabelSettings_276te")

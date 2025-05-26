@@ -42,6 +42,7 @@ func spawn_enemy() -> void:
 	enemy.speed = spawn_entry.speed
 	enemy.modulate = spawn_entry.modulate
 	enemy.scale = Vector2(spawn_entry.scale, spawn_entry.scale)
+	enemy.reward_experience = spawn_entry.experience
 
 	var spawn_direction = spawn_quadrants[randi() % spawn_quadrants.size()]
 

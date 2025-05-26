@@ -1,10 +1,54 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgcnf3dlclig6"]
+[gd_scene load_steps=17 format=3 uid="uid://dgcnf3dlclig6"]
 
 [ext_resource type="Texture2D" uid="uid://bxnwpffcqnljx" path="res://assets/main_menu_bg.png" id="1_0dkrt"]
 [ext_resource type="Theme" uid="uid://bi3fc10geaq1s" path="res://ui/yoho_theme.tres" id="1_t7e0r"]
 [ext_resource type="Script" uid="uid://dar2k5qqq03bi" path="res://ui/main_menu.gd" id="1_wk0pr"]
-[ext_resource type="PackedScene" uid="uid://c7gsj0bf61dut" path="res://skill_tree/skill_button.tscn" id="4_rmr83"]
-[ext_resource type="Texture2D" uid="uid://bic003e82frmd" path="res://assets/ui/skills/axe_icon.png" id="5_8uxxo"]
+[ext_resource type="PackedScene" uid="uid://dsrq28d6oc8ws" path="res://ui/skill_button.tscn" id="4_ei257"]
+[ext_resource type="Texture2D" uid="uid://dwbxvbsah0of3" path="res://assets/ui.png" id="6_ei257"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ri8"]
+atlas = ExtResource("6_ei257")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uxxo"]
+atlas = ExtResource("6_ei257")
+region = Rect2(112, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsdqh"]
+atlas = ExtResource("6_ei257")
+region = Rect2(112, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jiymt"]
+atlas = ExtResource("6_ei257")
+region = Rect2(96, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nobx"]
+atlas = ExtResource("6_ei257")
+region = Rect2(112, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgtsx"]
+atlas = ExtResource("6_ei257")
+region = Rect2(96, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kaxbk"]
+atlas = ExtResource("6_ei257")
+region = Rect2(96, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei257"]
+atlas = ExtResource("6_ei257")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubpvv"]
+atlas = ExtResource("6_ei257")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arv2f"]
+atlas = ExtResource("6_ei257")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5klac"]
+atlas = ExtResource("6_ei257")
+region = Rect2(112, 32, 16, 16)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -33,79 +77,234 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeContainer" type="PanelContainer" parent="VBoxContainer/Control/ScrollContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(160, 220)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme = ExtResource("1_t7e0r")
 
-[node name="Control" type="Control" parent="VBoxContainer/PanelContainer2"]
+[node name="SkillTreeButtonContainer" type="Control" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="SkillButton" parent="VBoxContainer/PanelContainer2/Control" instance=ExtResource("4_rmr83")]
-layout_mode = 2
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 26.0
-offset_bottom = 26.0
-texture_normal = ExtResource("5_8uxxo")
-skill_name = "Return"
-skill_description = "Your axe returns to you after throwing it."
-skill_levels = 1
-skill_id = "return"
-
-[node name="SkillButton" parent="VBoxContainer/PanelContainer2/Control/SkillButton" instance=ExtResource("4_rmr83")]
+[node name="Panel" type="Panel" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer"]
+custom_minimum_size = Vector2(80, 30)
 layout_mode = 0
-offset_left = 56.0
-offset_top = -88.0
-offset_right = 96.0
-offset_bottom = -48.0
-disabled = true
-skill_name = "Fiery Weapon"
-skill_description = "Your axe emits fire damage around it."
-skill_levels = 3
-skill_id = "fiery_weapon"
+offset_left = 30.0
+offset_top = 188.0
+offset_right = 110.0
+offset_bottom = 218.0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -11.5
+offset_right = 24.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_p8ri8")
+stretch_mode = 3
+
+[node name="XPLabel" type="Label" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/Panel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SkillButton" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 52.0
+offset_right = 86.0
+offset_bottom = 84.0
+title = "Recall"
+description = "Right click to return your axe."
+level_cost = Array[int]([100])
+skill_id = "axe_recall"
+icon = SubResource("AtlasTexture_8uxxo")
+skill_color = Color(0.347951, 0.655771, 0.723669, 1)
+
+[node name="SkillButton2" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = -16.0
+disabled = true
+title = "Abominable Yeeti"
+description = "Increae axe range and speed."
+level_cost = Array[int]([300, 1500, 4500])
+skill_id = "axe_range"
+icon = SubResource("AtlasTexture_lsdqh")
+skill_color = Color(0, 0.644632, 0.545325, 1)
+
+[node name="SkillButton3" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 48.0
+offset_right = 32.0
+offset_bottom = 80.0
+disabled = true
+title = "Hack and Slash"
+description = "Increae axe damage."
+level_cost = Array[int]([250, 1000, 3000, 10000, 15000])
+skill_id = "axe_damage"
+icon = SubResource("AtlasTexture_jiymt")
+skill_color = Color(0, 0.644632, 0.545325, 1)
+
+[node name="SkillButton5" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton/SkillButton3" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 0.0
+offset_right = 80.0
+offset_bottom = 32.0
+disabled = true
+title = "Hellfire"
+description = "Axe ignites enemised on hit."
+level_cost = Array[int]([500, 5000, 10000])
+skill_id = "axe_fire"
+icon = SubResource("AtlasTexture_0nobx")
+skill_color = Color(0, 0.644632, 0.545325, 1)
+
+[node name="SkillButton4" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton/SkillButton3" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 48.0
+offset_right = 32.0
+offset_bottom = 80.0
+disabled = true
+title = "Permafrost"
+description = "Axe slows enemies on hit."
+level_cost = Array[int]([500, 5000, 10000])
+skill_id = "axe_frost"
+icon = SubResource("AtlasTexture_bgtsx")
+skill_color = Color(0, 0.644632, 0.545325, 1)
+
+[node name="SkillButton4" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 0.0
+offset_right = 80.0
+offset_bottom = 32.0
+disabled = true
+title = "Ricochet"
+description = "Axe's loses no momentum on impact."
+level_cost = Array[int]([10])
+skill_id = "axe_ricochet"
+icon = SubResource("AtlasTexture_kaxbk")
+skill_color = Color(0, 0.644632, 0.545325, 1)
+
+[node name="SkillButton2" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 38.0
+offset_bottom = 36.0
+title = "Health"
+description = "Increase maximum health."
+level_cost = Array[int]([25, 100, 250, 750, 1750])
+skill_id = "max_health"
+icon = SubResource("AtlasTexture_ei257")
+skill_color = Color(0.73, 0.1095, 0.1095, 1)
+
+[node name="SkillButton3" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 52.0
+offset_right = 38.0
+offset_bottom = 84.0
+title = "XP Magnet"
+description = "Increase the radius at which you collect XP."
+level_cost = Array[int]([200, 800, 2000, 5000, 10000])
+skill_id = "xp_radius"
+icon = SubResource("AtlasTexture_ubpvv")
+skill_color = Color(0.19, 0.568, 1, 1)
+
+[node name="SkillButton4" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 100.0
+offset_right = 38.0
+offset_bottom = 132.0
+title = "Movement Speed"
+description = "Increase base movement speed."
+level_cost = Array[int]([25, 100, 250, 750, 1750])
+skill_id = "movement_speed"
+icon = SubResource("AtlasTexture_arv2f")
+skill_color = Color(0.1596, 0.84, 0.46578, 1)
+
+[node name="SkillButton5" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer" instance=ExtResource("4_ei257")]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 148.0
+offset_right = 38.0
+offset_bottom = 180.0
+title = "Shield"
+description = "Reduce damage taken per hit."
+level_cost = Array[int]([1000, 2000, 3000, 4000, 5000])
+skill_id = "shield"
+icon = SubResource("AtlasTexture_5klac")
+skill_color = Color(0.72, 0.72, 0.72, 1)
+
+[node name="MenuBarContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_t7e0r")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/MenuBarContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MenuBarContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer"]
+[node name="StartButton" type="Button" parent="VBoxContainer/MenuBarContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_t7e0r")
 text = "Start"
 
-[node name="SkillTreeButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer"]
+[node name="SkillsButton" type="Button" parent="VBoxContainer/MenuBarContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
-focus_mode = 0
-theme = ExtResource("1_t7e0r")
 text = "Skills"
 
-[node name="ResetButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-theme = ExtResource("1_t7e0r")
-text = "Reset"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer3"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MenuBarContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer2"]
+[node name="QuitButton" type="Button" parent="VBoxContainer/MenuBarContainer/HBoxContainer3/HBoxContainer2"]
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_t7e0r")
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer/SkillTreeButton" to="." method="_on_skill_tree_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer3/HBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuBarContainer/HBoxContainer3/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuBarContainer/HBoxContainer3/HBoxContainer/SkillsButton" to="." method="_on_skills_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuBarContainer/HBoxContainer3/HBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -5,9 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://iuxfb5w2ng4w" path="res://assets/enemies/bone_impact.wav" id="3_odbwd"]
 
 [node name="Skeleton" instance=ExtResource("1_eq7ty")]
-health = 2
-damage = 2
-speed = 15
 
 [node name="Sprite2D" parent="." index="1"]
 modulate = Color(0.843137, 0.843137, 0.713726, 1)
