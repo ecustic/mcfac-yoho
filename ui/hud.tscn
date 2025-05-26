@@ -42,6 +42,7 @@ region = Rect2(112, 16, 16, 16)
 
 [sub_resource type="SystemFont" id="SystemFont_276te"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_276te"]
 line_spacing = 0.0

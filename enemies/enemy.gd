@@ -149,4 +149,8 @@ func spawn_experience() -> void:
 	var experience: Experience = experience_scene.instantiate()
 	experience.value = reward_experience
 	experience.global_position = global_position
+
+	if (self is SkeletonBoss):
+		experience.final_reward = true
+
 	get_parent().add_child(experience)
