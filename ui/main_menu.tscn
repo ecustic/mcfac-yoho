@@ -150,7 +150,7 @@ description = "Right click to return your axe."
 level_cost = Array[int]([100])
 skill_id = "axe_recall"
 icon = SubResource("AtlasTexture_8uxxo")
-skill_color = Color(0.347951, 0.655771, 0.723669, 1)
+skill_color = Color(0.288, 0.2952, 0.72, 1)
 
 [node name="SkillButton2" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton" instance=ExtResource("4_ei257")]
 layout_mode = 0
@@ -164,7 +164,7 @@ description = "Increae axe range and speed."
 level_cost = Array[int]([300, 1500, 4500])
 skill_id = "axe_range"
 icon = SubResource("AtlasTexture_lsdqh")
-skill_color = Color(0, 0.644632, 0.545325, 1)
+skill_color = Color(0, 0.387, 0.86, 1)
 
 [node name="SkillButton3" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton" instance=ExtResource("4_ei257")]
 layout_mode = 0
@@ -178,7 +178,7 @@ description = "Increae axe damage."
 level_cost = Array[int]([250, 1000, 3000, 10000, 15000])
 skill_id = "axe_damage"
 icon = SubResource("AtlasTexture_jiymt")
-skill_color = Color(0, 0.644632, 0.545325, 1)
+skill_color = Color(1, 0, 0, 1)
 
 [node name="SkillButton5" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton/SkillButton3" instance=ExtResource("4_ei257")]
 layout_mode = 0
@@ -192,7 +192,7 @@ description = "Axe ignites enemised on hit."
 level_cost = Array[int]([500, 5000, 10000])
 skill_id = "axe_fire"
 icon = SubResource("AtlasTexture_0nobx")
-skill_color = Color(0, 0.644632, 0.545325, 1)
+skill_color = Color(0.9, 0.435, 0, 1)
 
 [node name="SkillButton4" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton/SkillButton3" instance=ExtResource("4_ei257")]
 layout_mode = 0
@@ -206,7 +206,7 @@ description = "Axe slows enemies on hit."
 level_cost = Array[int]([500, 5000, 10000])
 skill_id = "axe_frost"
 icon = SubResource("AtlasTexture_bgtsx")
-skill_color = Color(0, 0.644632, 0.545325, 1)
+skill_color = Color(0, 0.816667, 1, 1)
 
 [node name="SkillButton4" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer/SkillButton" instance=ExtResource("4_ei257")]
 layout_mode = 0
@@ -220,7 +220,7 @@ description = "Axe's loses no momentum on impact."
 level_cost = Array[int]([10])
 skill_id = "axe_ricochet"
 icon = SubResource("AtlasTexture_kaxbk")
-skill_color = Color(0, 0.644632, 0.545325, 1)
+skill_color = Color(0.2888, 0.76, 0.492987, 1)
 
 [node name="SkillButton2" parent="VBoxContainer/Control/ScrollContainer/SkillTreeContainer/SkillTreeButtonContainer" instance=ExtResource("4_ei257")]
 layout_mode = 0

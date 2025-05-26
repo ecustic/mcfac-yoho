@@ -75,6 +75,7 @@ default_color = Color(0.22, 0.239, 0.263, 1)
 [node name="Panel" type="Panel" parent="."]
 visible = false
 self_modulate = Color(0.75, 0.75, 0.75, 1)
+z_index = 99
 custom_minimum_size = Vector2(132, 52)
 layout_mode = 0
 offset_left = 30.0
